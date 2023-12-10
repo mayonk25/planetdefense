@@ -30,6 +30,11 @@ public class GamePanel extends JPanel implements Runnable{
 	Planet planet1;
 	Planet planet2;
 	Random random;
+
+	String shield1_skin_path = "image/paddle1.png";
+	String shield2_skin_path = "image/paddle2.png";
+	String bomb_skin_path = "image/mine.png";
+
 	
 	GamePanel(){
 		createShields();
@@ -46,7 +51,7 @@ public class GamePanel extends JPanel implements Runnable{
 	
 	public void createBall() {
 		random = new Random();
-		bomb = new Bomb((GAME_WIDTH/2)-(BOMB_SIZE/2),random.nextInt(GAME_HEIGHT-BOMB_SIZE),BOMB_SIZE,BOMB_SIZE);
+		bomb = new Bomb((GAME_WIDTH/2)-(BOMB_SIZE/2),random.nextInt(GAME_HEIGHT-BOMB_SIZE),BOMB_SIZE,BOMB_SIZE,bomb_skin_path);
 	}
 	
 	public void createShields() {
