@@ -22,7 +22,7 @@ public class Score extends Rectangle{
 	public void draw(Graphics g) {
 		g.setFont(new Font("Consolas", Font.PLAIN, 50));
 		
-		g.setColor(Color.blue);
+		g.setColor(Color.red);
 		g.drawString(String.valueOf(player1), GAME_WIDTH/2 - 80, 50);
 		
 		g.setColor(Color.red);
@@ -32,7 +32,7 @@ public class Score extends Rectangle{
 		g.drawLine(GAME_WIDTH/2, 0, GAME_WIDTH/2, GAME_HEIGHT);
 		
 		g.setFont(new Font("Consolas", Font.PLAIN, 20));
-		g.setColor(Color.black);
+		g.setColor(Color.green);
 		String p1health = "Planet 1 Health : " + String.valueOf(planet1.health) + "/100";
 		g.drawString(p1health, 20 , 20 );
 	

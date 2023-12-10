@@ -31,11 +31,14 @@ public class GamePanel extends JPanel implements Runnable{
 	Planet planet2;
 	Random random;
 
+	String planet1_skin_path = "image/planet1.png";
+	String planet2_skin_path = "image/planet2.png";
 	String shield1_skin_path = "image/paddle1.png";
 	String shield2_skin_path = "image/paddle2.png";
 	String bomb_skin_path = "image/mine.png";
+	String background_path = "image/backgroundnoplanet.png";
 
-	
+	private Image backgroundImage;
 	GamePanel(){
 		createShields();
 		createBall();
@@ -44,10 +47,29 @@ public class GamePanel extends JPanel implements Runnable{
 		this.setFocusable(true);
 		this.addKeyListener(new ActionListener());
 		this.setPreferredSize(SCREEN_SIZE);
+		backgroundImage = ImageLoader.loadImage(background_path);
+		setBackgroundImage(backgroundImage);
 		
 		gameThread = new Thread(this);
 		gameThread.start();
 	}
+
+	public void setBackgroundImage(Image backgroundImage) {
+        this.backgroundImage = backgroundImage;
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+		image = createImage(getWidth(),getHeight());
+		graphics = image.getGraphics();
+		draw(graphics);
+		g.drawImage(image, 0, 0, this);
+        if (backgroundImage != null) {
+            g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+        }
+        draw(g);
+    }
 	
 	public void createBall() {
 		random = new Random();
@@ -60,16 +82,18 @@ public class GamePanel extends JPanel implements Runnable{
 	}
 	
 	public void createPlanets() {
-		planet1 = new Planet(-PLANET_SIZE/2-925,(GAME_HEIGHT/2)-(PLANET_SIZE/2),PLANET_SIZE,1);
-		planet2 = new Planet(GAME_WIDTH-PLANET_SIZE/2+925,(GAME_HEIGHT/2)-(PLANET_SIZE/2),PLANET_SIZE,2);
+		planet1 = new Planet(-PLANET_SIZE/2-925,(GAME_HEIGHT/2)-(PLANET_SIZE/2),PLANET_SIZE,1,planet1_skin_path);
+		planet2 = new Planet(GAME_WIDTH-PLANET_SIZE/2+925,(GAME_HEIGHT/2)-(PLANET_SIZE/2),PLANET_SIZE,2,planet2_skin_path);
 	}
 	
-	public void paint(Graphics g) {
-		image = createImage(getWidth(),getHeight());
-		graphics = image.getGraphics();
-		draw(graphics);
-		g.drawImage(image, 0, 0, this);
-	}
+	// public void paint(Graphics g) {
+	// 	super.paint(g);
+
+	// 	image = createImage(getWidth(),getHeight());
+	// 	graphics = image.getGraphics();
+	// 	draw(graphics);
+	// 	g.drawImage(image, 0, 0, this);
+	// }
 	
 	public void draw(Graphics g) {
 		shield1.draw(g);
