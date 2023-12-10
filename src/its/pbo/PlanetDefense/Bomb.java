@@ -8,12 +8,14 @@ public class Bomb extends Rectangle{
 	Random random;
 	int xSpeed;
 	int ySpeed;
+	Image bombSkin;
 	
 	int initialSpeed = 4;
 	
-	Bomb(int x, int y, int width, int height){
+	Bomb(int x, int y, int width, int height, String imagePath){
 		super(x,y,width,height);
 		random = new Random();
+		this.bombSkin = ImageLoader.loadImage(imagePath);
 		
 		int randomXDirection = random.nextInt(2);
 		if (randomXDirection == 0)
@@ -40,7 +42,8 @@ public class Bomb extends Rectangle{
 	}
 	
 	public void draw(Graphics g) {
+		g.drawImage(bombSkin,x,y,width,height,null);
 		g.setColor(Color.pink);
-		g.fillOval(x, y, height, width);
+		g.drawOval(x, y, height, width);
 	}
 }
