@@ -6,15 +6,15 @@ import javax.swing.*;
 
 public class GamePanel extends JPanel implements Runnable{
 	
-	static final int GAME_WIDTH = 1000;
-	static final int GAME_HEIGHT = 563;
+	static final int GAME_WIDTH = 1280;
+	static final int GAME_HEIGHT = 763;
 	static final Dimension SCREEN_SIZE = new Dimension(GAME_WIDTH,GAME_HEIGHT);
-	int BOMB_SIZE = 25;
-	int SHIELD_WIDTH = 15;
-	int SHIELD_HEIGHT = 125;
-	int PLANET_SIZE = 1200;
+	int BOMB_SIZE = 40;
+	int SHIELD_WIDTH = 25;
+	int SHIELD_HEIGHT = 200;
+	int PLANET_SIZE = 2000; // 2000 - 1000 - 925 = 75px
 	// offset shield agar muat planet
-	int OFFSET = 125;
+	int OFFSET = 175;
 	int baseDamage = 10;
 	double dmgMultiplier = 0.1 ;
 	int damage;
@@ -55,8 +55,8 @@ public class GamePanel extends JPanel implements Runnable{
 	}
 	
 	public void createPlanets() {
-		planet1 = new Planet(-PLANET_SIZE/2-525,(GAME_HEIGHT/2)-(PLANET_SIZE/2),PLANET_SIZE,1);
-		planet2 = new Planet(GAME_WIDTH-PLANET_SIZE/2+525,(GAME_HEIGHT/2)-(PLANET_SIZE/2),PLANET_SIZE,2);
+		planet1 = new Planet(-PLANET_SIZE/2-925,(GAME_HEIGHT/2)-(PLANET_SIZE/2),PLANET_SIZE,1);
+		planet2 = new Planet(GAME_WIDTH-PLANET_SIZE/2+925,(GAME_HEIGHT/2)-(PLANET_SIZE/2),PLANET_SIZE,2);
 	}
 	
 	public void paint(Graphics g) {
@@ -122,14 +122,14 @@ public class GamePanel extends JPanel implements Runnable{
 		
 		if (bomb.intersects(planet1)) {
 			score.player2 += 1;
-		    damage = (int)(baseDamage * (double)(1 + 0.2 *(double)(Math.abs(bomb.xSpeed)-2)));
+		    damage = (int)(baseDamage * (double)(1 + dmgMultiplier *(double)(Math.abs(bomb.xSpeed)-bomb.initialSpeed)));
 			planet1.health -= damage;
 			System.out.println("Player 2 Scores!\nhit damage : " + damage + "\nhit speed: " + Math.abs(bomb.xSpeed));
 			checkHealth();
 		}
 		if (bomb.intersects(planet2)) {
 			score.player1 += 1;
-			damage = (int)(baseDamage * (double)(1 + 0.2 *(double)(Math.abs(bomb.xSpeed)-2)));
+			damage = (int)(baseDamage * (double)(1 + dmgMultiplier *(double)(Math.abs(bomb.xSpeed)-bomb.initialSpeed)));
 			planet2.health -= damage;
 			System.out.println("Player 1 Scores!\nhit damage : " + damage + "\nhit speed: " + Math.abs(bomb.xSpeed));
 			checkHealth();
@@ -156,7 +156,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public void run() {
 		// game loop
 		long lastTime = System.nanoTime();
-		double amountOfTicks = 60.0;
+		double amountOfTicks = 60;
 		double ns = 1000000000 / amountOfTicks;
 		double delta = 0;
 

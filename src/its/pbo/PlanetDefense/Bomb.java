@@ -9,7 +9,7 @@ public class Bomb extends Rectangle{
 	int xSpeed;
 	int ySpeed;
 	
-	int initialSpeed = 2;
+	int initialSpeed = 4;
 	
 	Bomb(int x, int y, int width, int height){
 		super(x,y,width,height);
