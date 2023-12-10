@@ -1,6 +1,8 @@
 package its.pbo.PlanetDefense;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.ImageObserver;
+import java.net.URL;
 import java.util.*;
 import javax.swing.*;
 
@@ -9,12 +11,30 @@ public class Shield extends Rectangle{
 	int id;
 	int ySpeed;
 	int speed = 10;
+	Image shieldImage;
 	
-	Shield(int x, int y, int SHIELD_WIDTH, int SHIELD_HEIGHT, int id){
+	Shield(int x, int y, int SHIELD_WIDTH, int SHIELD_HEIGHT, int id, String imagePath){
 		super(x,y,SHIELD_WIDTH, SHIELD_HEIGHT);
 		this.id = id;
+
+		this.shieldImage = loadImage(imagePath);
 	}
+
+	private Image loadImage(String imagePath) {
+		URL imageURL = getClass().getResource(imagePath);
 	
+		if (imageURL == null) {
+			// Print an error message and return null or throw an exception
+			System.err.println("Error loading image: " + imagePath);
+			return null; // or throw new RuntimeException("Error loading image: " + imagePath);
+		}
+	
+		System.out.println("Loaded image from: " + imageURL.toExternalForm());
+	
+		ImageIcon icon = new ImageIcon(imageURL);
+		return icon.getImage();
+	}
+
 	public void keyPressed(KeyEvent e) {
 		switch(id) {
 		case 1 : 
@@ -80,12 +100,14 @@ public class Shield extends Rectangle{
 	}
 	
 	public void draw(Graphics g) {
+
+		g.drawImage(shieldImage, x, y, width, height, null);
 		if (id == 1) {
 			g.setColor(Color.cyan);
 		}
 		else {
 			g.setColor(Color.yellow);
 		}
-		g.fillRect(x, y, width, height);
+		g.drawRect(x, y, width, height);
 	}
 }

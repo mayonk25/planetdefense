@@ -50,8 +50,8 @@ public class GamePanel extends JPanel implements Runnable{
 	}
 	
 	public void createShields() {
-		shield1 = new Shield(OFFSET, (GAME_HEIGHT/2)-(SHIELD_HEIGHT/2),SHIELD_WIDTH , SHIELD_HEIGHT, 1);
-		shield2 = new Shield(GAME_WIDTH-SHIELD_WIDTH-OFFSET, (GAME_HEIGHT/2)-(SHIELD_HEIGHT/2),SHIELD_WIDTH , SHIELD_HEIGHT, 2);
+		shield1 = new Shield(OFFSET, (GAME_HEIGHT/2)-(SHIELD_HEIGHT/2),SHIELD_WIDTH , SHIELD_HEIGHT, 1,"image/paddle1.png");
+		shield2 = new Shield(GAME_WIDTH-SHIELD_WIDTH-OFFSET, (GAME_HEIGHT/2)-(SHIELD_HEIGHT/2),SHIELD_WIDTH , SHIELD_HEIGHT, 2,"image/paddle2.png");
 	}
 	
 	public void createPlanets() {
