@@ -18,7 +18,7 @@ public class GamePanel extends JPanel implements Runnable{
 	int baseDamage = 10;
 	double dmgMultiplier = 0.1 ;
 	int damage;
-	int runGame = 1;
+	int runGame = 0;
 	
 	Thread gameThread;
 	Image image;
@@ -30,30 +30,45 @@ public class GamePanel extends JPanel implements Runnable{
 	Planet planet1;
 	Planet planet2;
 	Random random;
+	
 
-	String planet1_skin_path = "image/planet1.png";
+	String planet1_skin_path = "image/planet11.png";
 	String planet2_skin_path = "image/planet2.png";
 	String shield1_skin_path = "image/paddle1.png";
 	String shield2_skin_path = "image/paddle2.png";
 	String bomb_skin_path = "image/mine.png";
 	String background_path = "image/backgroundnoplanet.png";
 
-	private Image backgroundImage;
+	public Image backgroundImage;
 	GamePanel(){
+		
+		
 		createShields();
 		createBall();
 		createPlanets();
 		score = new Score(GAME_WIDTH, GAME_HEIGHT, planet1, planet2);
 		this.setFocusable(true);
+		this.requestFocusInWindow();
 		this.addKeyListener(new ActionListener());
+		this.addMouseListener(new MouseInput());
+		this.addMouseMotionListener(new MouseInput());
 		this.setPreferredSize(SCREEN_SIZE);
 		backgroundImage = ImageLoader.loadImage(background_path);
 		setBackgroundImage(backgroundImage);
 		
 		gameThread = new Thread(this);
 		gameThread.start();
-	}
+		
+		
+		JLabel label = new JLabel("Game Panel");
+        add(label);
 
+        setLayout(new FlowLayout(FlowLayout.LEFT, 0, 50));
+        JButton backButton = new JButton("Back");
+        backButton.addActionListener(e -> goBack());
+        add(backButton);
+	}
+	
 	public void setBackgroundImage(Image backgroundImage) {
         this.backgroundImage = backgroundImage;
     }
@@ -86,28 +101,20 @@ public class GamePanel extends JPanel implements Runnable{
 		planet2 = new Planet(GAME_WIDTH-PLANET_SIZE/2+925,(GAME_HEIGHT/2)-(PLANET_SIZE/2),PLANET_SIZE,2,planet2_skin_path);
 	}
 	
-	// public void paint(Graphics g) {
-	// 	super.paint(g);
-
-	// 	image = createImage(getWidth(),getHeight());
-	// 	graphics = image.getGraphics();
-	// 	draw(graphics);
-	// 	g.drawImage(image, 0, 0, this);
-	// }
 	
 	public void draw(Graphics g) {
-		shield1.draw(g);
-		shield2.draw(g);
-		bomb.draw(g);
-		planet1.draw(g);
-		planet2.draw(g);
-		score.draw(g);
+			shield1.draw(g);
+			shield2.draw(g);
+			bomb.draw(g);
+			planet1.draw(g);
+			planet2.draw(g);
+			score.draw(g);
 	}
 	
 	public void move() {
-		shield1.move();
-		shield2.move();
-		bomb.move();
+			shield1.move();
+			shield2.move();
+			bomb.move();
 	}
 	
 	public void checkCollision() {
@@ -189,7 +196,7 @@ public class GamePanel extends JPanel implements Runnable{
 		double ns = 1000000000 / amountOfTicks;
 		double delta = 0;
 
-		while (runGame == 1) {
+		while (runGame == 0) {
 			long now = System.nanoTime();
 			delta += (now-lastTime)/ns;
 			lastTime = now;
@@ -203,19 +210,32 @@ public class GamePanel extends JPanel implements Runnable{
 	}
 	
 	public void freezeGame() {
-		runGame = 0;
+		runGame = 1;
 		
 	}
+
 	
 	public class ActionListener extends KeyAdapter{
 		public void keyPressed(KeyEvent e) {
+			System.out.println("Key Pressed");
 			shield1.keyPressed(e);
 			shield2.keyPressed(e);
 		}
 		public void keyReleased(KeyEvent e) {
+			System.out.println("Key Released");
 			shield1.keyReleased(e);
 			shield2.keyReleased(e);
 		}
 	}
+	
+	private void switchToPanel(String panelName) {
+		 GameStatePanel parent = (GameStatePanel) getParent();
+		 parent.showPanel(panelName);
+	}
+	
+	private void goBack() {
+        GameStatePanel parent = (GameStatePanel) getParent();
+        parent.showPanel("MainMenu");
+    }
 }
 

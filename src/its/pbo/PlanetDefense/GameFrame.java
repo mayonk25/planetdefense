@@ -6,11 +6,13 @@ import javax.swing.*;
 
 public class GameFrame extends JFrame{
 	
-	GamePanel panel;
+	GameStatePanel panel;
+	//GamePanel panel;
 	Image backgroundImage;
 	
 	GameFrame() {
-		panel = new GamePanel();
+		//panel = new GamePanel();
+		panel = new GameStatePanel();
 		this.add(panel);
 		this.setTitle("Planet Defense");
 		this.setResizable(false);
@@ -21,5 +23,6 @@ public class GameFrame extends JFrame{
 		this.pack();
 		this.setVisible(true);
 		this.setLocationRelativeTo(null);
+		//add(new GameStatePanel());
 	}
 }
