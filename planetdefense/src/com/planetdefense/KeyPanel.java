@@ -15,7 +15,6 @@ public class KeyPanel extends KeyAdapter {
 	
 	public void keyPressed(KeyEvent e) {
 		
-		// TITLE KEY
 		if(panel.gameState == panel.homeState) {
 			if(e.getKeyCode()==KeyEvent.VK_D || e.getKeyCode()==KeyEvent.VK_RIGHT) {
 				panel.playSFX(5);
@@ -32,7 +31,7 @@ public class KeyPanel extends KeyAdapter {
 			if(e.getKeyChar() == '\n') {
 				panel.playSFX(1);
 				if(panel.optionNum == 0) {
-					panel.gameState = panel.gPlayState;
+					panel.gameState = panel.tutorialState;
 					panel.repaint();
 				}
 				if(panel.optionNum == 1) {
@@ -46,36 +45,11 @@ public class KeyPanel extends KeyAdapter {
 		}
 		
 		// SKIN KEY
-		else if(panel.gameState == panel.alterState) {
-			if(e.getKeyCode()==KeyEvent.VK_S || e.getKeyCode()==KeyEvent.VK_DOWN) {
-				panel.playSFX(5);
-				panel.optionNum++;
-				panel.repaint();
-				if(panel.optionNum > 2) panel.optionNum = 0;
-			}
-			if(e.getKeyCode()==KeyEvent.VK_W || e.getKeyCode()==KeyEvent.VK_UP) {
-				panel.playSFX(5);
-				panel.optionNum--;
-				panel.repaint();
-				if(panel.optionNum < 0) panel.optionNum = 2;
-			}
+		else if(panel.gameState == panel.tutorialState) {
+
 			if(e.getKeyChar() == '\n') {
 				panel.playSFX(1);
-				if(panel.optionNum == 0) {
-					panel.skinState = 0;
-					panel.gameState = panel.gPlayState;
-					panel.repaint(); 
-				}
-				if(panel.optionNum == 1) {
-					panel.skinState = 1;
-					panel.gameState = panel.gPlayState;
-					panel.repaint(); 
-				}
-				if(panel.optionNum == 2) {
-					panel.skinState = 2;
-					panel.gameState = panel.gPlayState;
-					panel.repaint(); 
-				}
+				panel.gameState = panel.gPlayState;
 			}
 		}
 		

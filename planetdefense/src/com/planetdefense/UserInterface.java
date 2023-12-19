@@ -52,11 +52,11 @@ public class UserInterface {
 		g.drawImage(panel.guidescreen, 0, 0, gWidth, gHeight, panel);
 	}
 
-	public void alterScreen(Graphics g) {
+	public void tutorialScreen(Graphics g) {
         
-		g.drawImage(panel.themescreen, 0, 0, panel);
+		g.drawImage(panel.tutorialscreen, 0, 0, panel);
 
-        String score = "Press 'Enter' to select!";
+        String score = "Press 'Enter' to continue!";
         Font sfont = new Font("Helvetica", Font.BOLD, 14);
         FontMetrics metr2 = g.getFontMetrics(sfont);
 
@@ -65,18 +65,6 @@ public class UserInterface {
         g.drawString(score, ((gWidth - metr2.stringWidth(score)) / 2) + 2, gHeight - 29);
         g.setColor(Color.WHITE);        
         g.drawString(score, (gWidth - metr2.stringWidth(score)) / 2, gHeight - 30);
-        
-        // draw selection
-        g.setColor(Color.WHITE);
-        if(panel.optionNum == 0) {
-        	g.drawRoundRect(48, 258, 372, 228, 20, 20);
-        }
-        else if(panel.optionNum == 1) {
-        	g.drawRoundRect(449, 258, 372, 228, 20, 20);
-        }
-        else if(panel.optionNum == 2) {
-        	g.drawRoundRect(850, 258, 372, 228, 20, 20);
-        }
         
     }
 	

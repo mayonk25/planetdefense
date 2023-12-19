@@ -2,7 +2,7 @@ package com.planetdefense;
 
 import java.awt.*;
 
-public class Score extends Rectangle{
+public class Health extends Rectangle{
 
 	int x, y, xstring; //posisi
 	int xfill, yfill; //posisi untuk geser kanan score yg kanan(berkurang ke kanan) 
@@ -11,7 +11,7 @@ public class Score extends Rectangle{
 	int player;
 	Color color;
 	
-	public Score(int x, int y, int barWidth, int barHeight, Color color, int player, int xstring) {
+	public Health(int x, int y, int barWidth, int barHeight, Color color, int player, int xstring) {
 		this.x=x;
 		this.y=y;
 		this.xfill=x;
@@ -28,7 +28,8 @@ public class Score extends Rectangle{
 		g.setColor(color);
 		g.setFont(new Font("Consolas",Font.PLAIN,20));
 		g.drawString("Planet "+String.valueOf(player), x+xstring, y-10);
-		//g.drawRect(x, y, barRWidth, barRHeight);
+		g.setColor(Color.magenta);
+		g.drawRect(x, y, barRWidth, barRHeight);
 		g.setColor(Color.green);
 		g.fillRect(xfill+3, yfill+3, barWidth-5, barHeight-5);
 	}

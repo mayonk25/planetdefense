@@ -29,7 +29,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int gPlayState = 1;
 	public final int pauseState = 2;
 	public final int aboutState = 3;
-	public final int alterState = 4;
+	public final int tutorialState = 4;
 	public final int gOverState = 5;
 
 	Collision collision = new Collision(this);
@@ -43,8 +43,8 @@ public class GamePanel extends JPanel implements Runnable{
 	Random random;
 	Shield shieldp1;
 	Shield shieldp2;
-	Score HealthPointP1;
-	Score HealthPointP2;
+	Health HealthPointP1;
+	Health HealthPointP2;
 	Bomb bomb1;
 	
 	
@@ -52,7 +52,7 @@ public class GamePanel extends JPanel implements Runnable{
 	Image homescreen;
 	Image gameover;
 	Image guidescreen;
-	Image themescreen;
+	Image tutorialscreen;
 	Image shield1;
 	Image shield2;
 	Image bomb;
@@ -96,8 +96,8 @@ public class GamePanel extends JPanel implements Runnable{
 	}
 	
 	public void newScore() {
-		HealthPointP1 = new Score(50, GAME_HEIGHT - 35, HEALTHPOINT_W, HEALTHPOINT_H, Color.white, 1, 0);
-		HealthPointP2 = new Score(GAME_WIDTH-HEALTHPOINT_W-50, GAME_HEIGHT - 35, HEALTHPOINT_W, HEALTHPOINT_H, Color.white, 2, HEALTHPOINT_W-90);
+		HealthPointP1 = new Health(50, GAME_HEIGHT - 35, HEALTHPOINT_W, HEALTHPOINT_H, Color.white, 1, 0);
+		HealthPointP2 = new Health(GAME_WIDTH-HEALTHPOINT_W-50, GAME_HEIGHT - 35, HEALTHPOINT_W, HEALTHPOINT_H, Color.white, 2, HEALTHPOINT_W-90);
 	}
 	
 	public void paint(Graphics g) {		
@@ -115,8 +115,8 @@ public class GamePanel extends JPanel implements Runnable{
 		else if(gameState == aboutState) {
 			ui.guideScreen(g);
 		}
-		else if(gameState == alterState) {
-			ui.alterScreen(g);
+		else if(gameState == tutorialState) {
+			ui.tutorialScreen(g);
 		}
 		else if(gameState == pauseState) {
 			ui.pauseScreen(g);
@@ -167,7 +167,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public void run() {
 		//game loop
 		long lastTime = System.nanoTime();
-		double amountOfTicks = 60.0;
+		double amountOfTicks = 600.0;
 		double ns = 1000000000 / amountOfTicks;
 		double delta = 0;
 		while(true) {

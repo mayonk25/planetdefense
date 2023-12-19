@@ -37,8 +37,8 @@ public class ImageLoader {
 		panel.bomb = bomb.getImage();
 		ImageIcon screenplay = new ImageIcon("assets/img/1bgImage1.png");
 		panel.screenplay = screenplay.getImage();
-		ImageIcon guide = new ImageIcon("assets/img/1miniguidescreen.png");
-		panel.themescreen = guide.getImage();
+		ImageIcon tutorial = new ImageIcon("assets/img/1miniguidescreen.png");
+		panel.tutorialscreen = tutorial.getImage();
 		
 	}
 }
