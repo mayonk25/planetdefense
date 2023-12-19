@@ -56,7 +56,7 @@ public class UserInterface {
         
 		g.drawImage(panel.tutorialscreen, 0, 0, panel);
 
-        String score = "Press 'Enter' to continue!";
+        String score = "Press ENTER to continue";
         Font sfont = new Font("Helvetica", Font.BOLD, 14);
         FontMetrics metr2 = g.getFontMetrics(sfont);
 
@@ -87,7 +87,7 @@ public class UserInterface {
 		g.drawImage(panel.retrybutton, (gWidth / 2) - (158 / 2), 415, 158, 90, panel);
 		g.drawImage(panel.homebutton, (gWidth / 2) - (158 / 2), 505, 158, 90, panel);
 		
-        String score = "Press 'Enter' to select!";
+        String score = "Press ENTER";
         Font sfont = new Font("Helvetica", Font.BOLD, 14);
         FontMetrics metr2 = g.getFontMetrics(sfont);
 
@@ -125,7 +125,7 @@ public class UserInterface {
         g.setColor(Color.WHITE);        
         g.drawString(msg, (gWidth - metr1.stringWidth(msg)) / 2, 340);
 
-        String score = "Press 'Enter' to select!";
+        String score = "Press ENTER";
         Font sfont = new Font("Helvetica", Font.BOLD, 14);
         FontMetrics metr2 = g.getFontMetrics(sfont);
 
