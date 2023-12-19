@@ -10,7 +10,7 @@ public class GameFrame extends JFrame{
 	GameFrame(){
 		panel = new GamePanel();
 		this.add(panel);
-		this.setTitle("Moon Bounce");
+		this.setTitle("Planet Defense");
 		this.setResizable(false);
 		this.setBackground(Color.black);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
